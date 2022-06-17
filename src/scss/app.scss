@@ -1,0 +1,195 @@
+@import url(
+'https://fonts.googleapis.com/css?family=Ubuntu'
+);
+
+@import "variables.scss";
+@import "mixins.scss";
+
+
+html {
+  background-color: $lightgrey;
+
+  body {
+    background: none;
+
+    & .trello {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &__main {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: 1rem;
+        background: none;
+        width: 80%;
+        height: 5rem;
+        font-weight: bold;
+        color: #5c5e5f;
+        font-size: 2rem;
+        font-family: Ubuntu, serif;
+
+        &__name {
+
+        }
+
+        &__time, &__date {
+          font-size: 1.5rem;
+        }
+      }
+
+      &__list {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        width: 80%;
+
+        &__dynamic {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          &__item {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            box-sizing: border-box;
+            padding: 1rem;
+            margin: 1rem;
+            border: 0.5rem solid $green;
+            border-radius: 1rem;
+            background-color: white;
+
+            &__description {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+            }
+
+            button {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              margin: 0.5rem;
+            }
+          }
+        }
+
+        &__todo {
+          @include block;
+
+          &__header {
+            background-color: $green;
+            @include header;
+
+            &__name, &__counter {
+              font-size: 1.5rem;
+            }
+          }
+
+          &__card {
+            position: absolute;
+            z-index: 1;
+            background-color: $green;
+            width: 25rem;
+            height: 25rem;
+          }
+
+          &__button {
+            background-color: $green;
+            @include mainButton
+          }
+        }
+
+        &__progress {
+          @include block;
+
+          &__header {
+            background-color: $purple;
+            @include header;
+
+            &__name, &__counter {
+              font-size: 1.5rem;
+            }
+          }
+
+          &__task {
+
+          }
+        }
+
+        &__done {
+          @include block;
+
+          &__header {
+            background-color: $orange;
+            @include header;
+
+            &__name, &__counter {
+              font-size: 1.5rem;
+            }
+          }
+
+          &__button {
+            background-color: $orange;
+            @include mainButton
+
+          }
+        }
+      }
+
+      &__modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 9%;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+
+        &__content {
+          background-color: $lightgrey;
+          margin: auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 30%;
+          height: 20rem;
+          border-radius: 1rem;
+          box-shadow: rgba(17, 17, 26, 0.1) 0 8px 24px, rgba(17, 17, 26, 0.1) 0 16px 56px, rgba(17, 17, 26, 0.1) 0 24px 80px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+
+          &__handle {
+            height: 5rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            color: #5c5e5f;
+            font-weight: bold;
+
+            &__submit {
+              background-color: $green;
+              @include modalButton
+            }
+
+            &__close {
+              background-color: $orange;
+              @include modalButton
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

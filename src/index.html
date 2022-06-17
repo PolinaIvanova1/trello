@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>trello</title>
+    <link rel="stylesheet" href="./scss/app.scss">
+    <link rel="stylesheet" href="./scss/variables.scss">
+    <link rel="stylesheet" href="./scss/mixins.scss">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Cardo' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Playfair Display' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <script src="./js/app.js" type="module"></script>
+    <script src="./js/helpers.js" type="module"></script>
+    <script src="./js/templates.js" type="module"></script>
+
+</head>
+<body>
+<section class="trello">
+    <header class="trello__main">
+        <div class="trello__main__date"></div>
+        <div class="trello__main__time"></div>
+    </header>
+    <div class="trello__list">
+        <div class="trello__list__todo">
+            <div class="trello__list__todo__header">
+                <div class="trello__list__todo__header__name">TO DO</div>
+                <div class="trello__list__todo__header__counter">0</div>
+            </div>
+            <div class="trello__card">
+            </div>
+            <div class="trello__list__dynamic">
+            </div>
+            <button class="trello__list__todo__button btn btn-outline-secondary btn-lg">
+                add new
+            </button>
+        </div>
+        <div class="trello__list__progress">
+            <div class="trello__list__progress__header">
+                <div class="trello__list__progress__header__name">
+                    IN PROGRESS
+                </div>
+                <div class="trello__list__progress__header__counter">0</div>
+            </div>
+
+            <div class="trello__list__progress__task">
+
+            </div>
+        </div>
+        <div class="trello__list__done">
+            <div class="trello__list__done__header">
+                <div class="trello__list__done__header__name">
+                    DONE
+                </div>
+                <div class="trello__list__done__header__counter">0</div>
+            </div>
+
+            <button class="trello__list__done__button btn btn-outline-secondary btn-lg">
+                delete all
+            </button>
+        </div>
+    </div>
+    <div class="trello__modal">
+        <div class="card-body trello__modal__content">
+            <input type="text" name="title" class="form-control trello__modal__content__title" placeholder="title"
+                   aria-label="Username"
+                   aria-describedby="addon-wrapping">
+            <textarea name="description" class="form-control trello__modal__content__description"
+                      aria-label="With textarea" placeholder="description"></textarea>
+            <select name="user" class="form-select trello__modal__content__user" aria-label="Default select example">
+            </select>
+            <div class="trello__modal__content__handle">
+                <button class="btn btn-outline-secondary trello__modal__content__handle__submit" type="submit">ok
+                </button>
+                <button class="btn btn-outline-secondary trello__modal__content__handle__close" type="button">cancel
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>
