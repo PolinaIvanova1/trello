@@ -54,6 +54,7 @@ html {
           &__item {
             display: flex;
             justify-content: space-between;
+            min-height: 11rem;
             width: 80%;
             box-sizing: border-box;
             padding: 1rem;
@@ -62,18 +63,28 @@ html {
             border-radius: 1rem;
             background-color: white;
 
+            &__orange {
+              border: 0.5rem solid $orange;
+            }
+            &__purple {
+              border: 0.5rem solid $purple;
+            }
             &__description {
               display: flex;
               flex-direction: column;
               justify-content: space-between;
             }
 
-            button {
+            &__edit, &__delete {
               display: flex;
               flex-direction: column;
               justify-content: space-between;
               margin: 0.5rem;
             }
+            &__hide {
+              display: none;
+            }
+
           }
         }
 
@@ -116,6 +127,10 @@ html {
           }
 
           &__task {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
           }
         }
@@ -130,6 +145,13 @@ html {
             &__name, &__counter {
               font-size: 1.5rem;
             }
+          }
+
+          &__task {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
 
           &__button {
@@ -193,3 +215,5 @@ html {
   }
 
 }
+
+
