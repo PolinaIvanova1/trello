@@ -18,7 +18,8 @@
     <script src="./js/app.js" type="module"></script>
     <script src="./js/helpers.js" type="module"></script>
     <script src="./js/templates.js" type="module"></script>
-
+    <script src="./js/compositions.js" type="module"></script>
+    <script src="./js/data.js" type="module"></script>
 </head>
 <body>
 <section class="trello">
@@ -30,7 +31,7 @@
         <div class="trello__list__todo">
             <div class="trello__list__todo__header">
                 <div class="trello__list__todo__header__name">TO DO</div>
-                <div class="trello__list__todo__header__counter">0</div>
+                <div class="trello__list__todo__header__counter" id="counter">0</div>
             </div>
             <div class="trello__card">
             </div>
@@ -45,7 +46,7 @@
                 <div class="trello__list__progress__header__name">
                     IN PROGRESS
                 </div>
-                <div class="trello__list__progress__header__counter">0</div>
+                <div class="trello__list__progress__header__counter" id="counterInProgress"></div>
             </div>
 
             <div class="trello__list__progress__task">
@@ -57,22 +58,24 @@
                 <div class="trello__list__done__header__name">
                     DONE
                 </div>
-                <div class="trello__list__done__header__counter">0</div>
+                <div class="trello__list__done__header__counter" id="counterDone"></div>
             </div>
+            <div class="trello__list__done__task">
 
+            </div>
             <button class="trello__list__done__button btn btn-outline-secondary btn-lg">
                 delete all
             </button>
         </div>
     </div>
     <div class="trello__modal">
-        <div class="card-body trello__modal__content">
+        <form class="card-body trello__modal__content">
             <input type="text" name="title" class="form-control trello__modal__content__title" placeholder="title"
-                   aria-label="Username"
-                   aria-describedby="addon-wrapping">
+                   aria-label="Username" aria-describedby="addon-wrapping" required>
             <textarea name="description" class="form-control trello__modal__content__description"
-                      aria-label="With textarea" placeholder="description"></textarea>
-            <select name="user" class="form-select trello__modal__content__user" aria-label="Default select example">
+                      aria-label="With textarea" placeholder="description" required></textarea>
+            <select name="user" class="form-select trello__modal__content__user" required>
+                <option value="" disabled selected hidden>user</option>
             </select>
             <div class="trello__modal__content__handle">
                 <button class="btn btn-outline-secondary trello__modal__content__handle__submit" type="submit">ok
@@ -80,7 +83,7 @@
                 <button class="btn btn-outline-secondary trello__modal__content__handle__close" type="button">cancel
                 </button>
             </div>
-        </div>
+        </form>
 
     </div>
 

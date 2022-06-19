@@ -1,4 +1,14 @@
 import {$} from "./helpers";
+import {todos, updateLocalStorage} from "./data";
+
+
+function Todo(title, description, user) {
+    this.title = title;
+    this.description = description;
+    this.user = user;
+    this.createdAt = getDate();
+    this.id = new Date().getTime();
+}
 
 function getDate() {
     let today = new Date();
@@ -34,4 +44,21 @@ function showCurrentTime() {
 
 setInterval(showCurrentTime, 1000)
 
-export {getDate, showCurrentTime}
+const deleteTask = (id, array) => {
+    const index = array.findIndex(task => task.id.toString() === id.toString());
+    array.splice(index, 1);
+    updateLocalStorage('todos', todos);
+
+}
+
+function countTodos(array, element) {
+    if (!array || array === []) {
+        element.innerText = `0`
+    } else {
+        element.innerText = array.length
+    }
+}
+
+
+
+export {getDate, showCurrentTime, Todo,countTodos,deleteTask}

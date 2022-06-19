@@ -1,9 +1,13 @@
-const getFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem('todos'));
+const getFromLocalStorage = (name) => {
+    return JSON.parse(localStorage.getItem(name));
 }
 
-const updateLocalStorage = (todos) => {
-    localStorage.setItem('todos', JSON.stringify(todos));
+const updateLocalStorage = (name, tasks) => {
+    localStorage.setItem(name, JSON.stringify(tasks));
 }
 
-export {getFromLocalStorage,updateLocalStorage}
+let todos = getFromLocalStorage('todos') || [];
+let todosInProgress = getFromLocalStorage('todosInProgress') || [];
+let todosDone = getFromLocalStorage('todosDone') || [];
+
+export {getFromLocalStorage, updateLocalStorage, todos, todosInProgress, todosDone}
