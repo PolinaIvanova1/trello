@@ -80,7 +80,9 @@ function handleClickButtonDeleteElement(event) {
     if (role === 'removeTodo') {
         const todoListElement = target.closest('.trello__list__dynamic__item');
         const id = todoListElement.id;
-        deleteTask(id)
+        deleteTask(id, todos, 'todos')
+        deleteTask(id, todosInProgress, 'todosInProgress')
+        deleteTask(id, todosDone, 'todosDone')
         renderTasks();
     }
 }
