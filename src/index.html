@@ -16,22 +16,6 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
     <script src="./js/app.js" type="module"></script>
-    <script src="./js/helpers.js" type="module"></script>
-    <script src="./js/templates.js" type="module"></script>
-    <script src="./js/compositions.js" type="module"></script>
-    <script src="./js/data.js" type="module"></script>
-    <!--    <script>-->
-    <!--        // The function below will start the confirmation dialog-->
-    <!--        function confirmAction() {-->
-    <!--            let confirmAction = confirm("Are you sure to execute this action?");-->
-    <!--            if (confirmAction) {-->
-    <!--                alert("Action successfully executed");-->
-
-    <!--            } else {-->
-    <!--                alert("Action canceled");-->
-    <!--            }-->
-    <!--        }-->
-    <!--    </script>-->
 </head>
 <body>
 <section class="trello">
@@ -60,9 +44,9 @@
                 </div>
                 <div class="trello__list__progress__header__counter" id="counterInProgress"></div>
             </div>
-
             <div class="trello__list__progress__task overflow-auto">
-
+            </div>
+            <div class="trello__list__progress__bottom trello__list__todo__button">
             </div>
         </div>
         <div class="trello__list__done">
@@ -117,7 +101,6 @@
             <div class=" trello__warningTasks__content__message">You can't have more than 6 tasks in
                 progress!
             </div>
-
             <button class="btn btn-outline-secondary trello__warningTasks__content__submit" type="submit">ok
             </button>
         </form>

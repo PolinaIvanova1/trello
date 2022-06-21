@@ -1,5 +1,5 @@
-function $(selector) {
-    return document.querySelector(selector);
+function $ (selector) {
+  return document.querySelector(selector);
 }
 
-export {$}
+export { $ }
