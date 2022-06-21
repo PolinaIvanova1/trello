@@ -7,12 +7,18 @@ import {
     inputTitleElement,
     textareaDescriptionElement,
     selectUserElement,
+    cleanList
 } from "./compositions";
 import {users} from './app'
 import {todos, todosDone, todosInProgress, updateLocalStorage} from "./data";
+import {} from "./templates";
+
+
+let currentTodo;
+
+// show and hide modal form
 
 const modalWindowElement = $('.trello__modal');
-let currentTodo = undefined;
 
 function handleClickButtonOpenModal(event) {
     modalWindowElement.style.display = 'block'
@@ -22,17 +28,40 @@ function handleClickButtonCloseModal(event) {
     modalWindowElement.style.display = 'none';
 }
 
+// show and hide modal warning, if you try to delete all done tasks
+
+const modalWarningDeleteElement = $('.trello__warningDelete');
+
+function showWarning() {
+    modalWarningDeleteElement.style.display = 'block'
+}
+
+function hideWarning() {
+    modalWarningDeleteElement.style.display = 'none'
+}
+
+function handleClickWarningDeleteTasks(event) {
+    showWarning()
+    const formWarningElement = $('#formWarning')
+    const cancelDeleteElement = $('#cancel')
+    formWarningElement.addEventListener('submit', (e) => {
+        e.preventDefault()
+        cleanList()
+        hideWarning()
+    })
+    cancelDeleteElement.addEventListener('click', () => {
+        hideWarning()
+    })
+}
+
 function handleClickAddNewButton() {
     fillTodoForm();
-    handleClickButtonOpenModal()
+    handleClickButtonOpenModal();
 }
 
 function handleClickCancelButton() {
-    currentTodo = undefined
-    handleClickButtonCloseModal()
-    inputTitleElement.classList.remove('is-invalid')
-    textareaDescriptionElement.classList.remove('is-invalid')
-    selectUserElement.classList.remove('is-invalid')
+    currentTodo = undefined;
+    handleClickButtonCloseModal();
 }
 
 function handleClickButtonAddTask(event) {
@@ -66,10 +95,9 @@ function handleClickButtonEditElement(event) {
         const id = todoListElement.id;
         const task = todos.find(todo => todo.id.toString() === id.toString());
         if (!task) return;
-        console.log(task)
         currentTodo = task;
-        fillTodoForm(task)
-        handleClickButtonOpenModal()
+        fillTodoForm(task);
+        handleClickButtonOpenModal();
         renderTasks();
     }
 }
@@ -80,9 +108,8 @@ function handleClickButtonDeleteElement(event) {
     if (role === 'removeTodo') {
         const todoListElement = target.closest('.trello__list__dynamic__item');
         const id = todoListElement.id;
-        deleteTask(id, todos, 'todos')
-        deleteTask(id, todosInProgress, 'todosInProgress')
         deleteTask(id, todosDone, 'todosDone')
+        deleteTask(id, todos, 'todos')
         renderTasks();
     }
 }
@@ -98,8 +125,8 @@ function handleChangeStatus(event) {
         const id = taskElement.id;
         const allTodos = [...todos, ...todosInProgress, ...todosDone]
         const task = allTodos.find(todo => todo.id.toString() === id.toString());
+        if (!task) return
         task.status = value
-        console.log(task.status)
         if (value === 'inProgress') {
             todosInProgress.push(task);
             deleteTask(id, todos, 'todos')
@@ -130,5 +157,7 @@ export {
     handleClickButtonAddTask,
     handleClickButtonEditElement,
     handleClickButtonDeleteElement,
-    handleChangeStatus
+    handleChangeStatus,
+
+    handleClickWarningDeleteTasks
 }

@@ -20,6 +20,18 @@
     <script src="./js/templates.js" type="module"></script>
     <script src="./js/compositions.js" type="module"></script>
     <script src="./js/data.js" type="module"></script>
+    <!--    <script>-->
+    <!--        // The function below will start the confirmation dialog-->
+    <!--        function confirmAction() {-->
+    <!--            let confirmAction = confirm("Are you sure to execute this action?");-->
+    <!--            if (confirmAction) {-->
+    <!--                alert("Action successfully executed");-->
+
+    <!--            } else {-->
+    <!--                alert("Action canceled");-->
+    <!--            }-->
+    <!--        }-->
+    <!--    </script>-->
 </head>
 <body>
 <section class="trello">
@@ -63,7 +75,7 @@
             <div class="trello__list__done__task overflow-auto">
 
             </div>
-            <button class="trello__list__done__button btn btn-outline-secondary btn-lg">
+            <button class="trello__list__done__button btn btn-outline-secondary btn-lg" id="showWarningDelete">
                 delete all
             </button>
         </div>
@@ -84,9 +96,32 @@
                 </button>
             </div>
         </form>
-
     </div>
+    <div class="trello__warningDelete">
+        <form class="card-body trello__warningDelete__content" id="formWarning">
+            <div class="trello__warningDelete__content__message">Are you sure to delete all done tasks?
+            </div>
+            <div class="trello__warningDelete__content__click">
+                <button class="btn btn-outline-secondary" type="submit" id="confirm">
+                    ok
+                </button>
+                <button class="btn btn-outline-secondary" type="button" id="cancel">
+                    cancel
+                </button>
+            </div>
 
+        </form>
+    </div>
+    <div class="trello__warningTasks">
+        <form class="card-body trello__warningTasks__content">
+            <div class=" trello__warningTasks__content__message">You can't have more than 6 tasks in
+                progress!
+            </div>
+
+            <button class="btn btn-outline-secondary trello__warningTasks__content__submit" type="submit">ok
+            </button>
+        </form>
+    </div>
 </section>
 
 </body>

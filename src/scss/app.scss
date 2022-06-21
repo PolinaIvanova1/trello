@@ -66,9 +66,11 @@ html {
             &__orange {
               border: 0.5rem solid $orange;
             }
+
             &__purple {
               border: 0.5rem solid $purple;
             }
+
             &__description {
               display: flex;
               flex-direction: column;
@@ -81,6 +83,7 @@ html {
               justify-content: space-between;
               margin: 0.5rem;
             }
+
             &__hide {
               display: none;
             }
@@ -211,9 +214,49 @@ html {
           }
         }
       }
+
+      &__warningDelete {
+        @include warning;
+
+
+        &__content {
+          @include warningContent;
+
+          &__message {
+            display: flex;
+
+          }
+
+          &__click {
+            #confirm {
+              background-color: $green;
+              @include modalButton
+            }
+
+            #cancel {
+              background-color: $orange;
+              @include modalButton
+            }
+          }
+        }
+
+
+      }
+
+      &__warningTasks {
+        @include warning;
+
+
+        &__content {
+          @include warningContent;
+
+          &__message {
+            display: flex;
+          }
+        }
+      }
     }
+
   }
 
 }
-
-

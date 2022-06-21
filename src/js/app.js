@@ -1,3 +1,4 @@
+import {$} from './helpers'
 import {
     renderTasks,
     renderModal,
@@ -6,6 +7,8 @@ import {
     formElement,
     todoListElement,
     contentElement,
+    todoInProgressElement,
+    todoDoneElement,
 } from './compositions.js';
 
 import {
@@ -15,6 +18,8 @@ import {
     handleChangeStatus,
     handleClickAddNewButton,
     handleClickCancelButton,
+    handleClickButtonDeleteAll,
+    handleClickWarningDeleteTasks
 } from './handlers.js';
 
 let users = []
@@ -22,10 +27,10 @@ let users = []
 async function fetchUsers() {
     const response = await fetch('https://jsonplaceholder.typicode.com/users/');
     const data = await response.json();
-    console.log(data)
-   users = data.map(user => ({id: `${user.id}`, name: `${user.name}`}));
-
+    users = data.map(user => ({id: `${user.id}`, name: `${user.name}`}));
 }
+
+const todoDeleteAllElement = $('.trello__list__done__button')
 
 function addListeners() {
     buttonOpenModalElement.addEventListener('click', handleClickAddNewButton);
@@ -33,8 +38,9 @@ function addListeners() {
     formElement.addEventListener('submit', handleClickButtonAddTask)
     todoListElement.addEventListener('click', handleClickButtonEditElement);
     todoListElement.addEventListener('click', handleClickButtonDeleteElement);
+    todoDoneElement.addEventListener('click', handleClickButtonDeleteElement);
     contentElement.addEventListener('change', handleChangeStatus)
-
+    todoDeleteAllElement.addEventListener('click', handleClickWarningDeleteTasks)
 }
 
 async function start() {

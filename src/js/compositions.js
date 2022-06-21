@@ -79,7 +79,6 @@ const deleteTask = (id, array, name) => {
     if (index < 0) return
     array.splice(index, 1);
     updateLocalStorage(name, array);
-
 }
 
 function countTodos(array, element) {
@@ -95,7 +94,6 @@ function fillTodoForm(task) {
     textareaDescriptionElement.value = task?.description || ''
     selectUserElement.value = task?.user.id || ''
 }
-
 
 function renderModal() {
     users.forEach(user => {
@@ -119,9 +117,13 @@ function renderTasks() {
     todosDone.forEach((item, index) => {
         todoDoneElement.innerHTML += createTemplateTodo(item, index);
     })
-
 }
 
+function cleanList() {
+    todosDone.length = 0
+    updateLocalStorage('todosDone', todosDone)
+    renderTasks()
+}
 
 export {
     users,
@@ -142,5 +144,6 @@ export {
     buttonCloseModalElement,
     inputTitleElement,
     textareaDescriptionElement,
-    selectUserElement
+    selectUserElement,
+    cleanList
 }

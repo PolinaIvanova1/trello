@@ -40,3 +40,33 @@
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+@mixin warning {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 9%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  font-size: 1.5rem;
+}
+
+@mixin warningContent {
+  height: 12rem;
+  width: 30%;
+  background-color: $lightgrey;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 1rem;
+  box-shadow: rgba(17, 17, 26, 0.1) 0 8px 24px, rgba(17, 17, 26, 0.1) 0 16px 56px, rgba(17, 17, 26, 0.1) 0 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+}
