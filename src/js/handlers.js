@@ -8,20 +8,24 @@ import {
   inputTitleElement,
   textareaDescriptionElement,
   selectUserElement,
+  priorityElement,
+  estimateElement,
   cleanList,
   showWarningInProgress
 } from './compositions';
-
-import { users } from './app';
 
 import {
   todos,
   todosDone,
   todosInProgress,
-  updateLocalStorage
+  users,
+  updateLocalStorage,
+  setTodos,
+  getFromLocalStorage, setTodosInProgress, setTodosDone
 } from './data';
 
-// undefined todo
+// create undefined task
+
 let currentTodo;
 
 // show and hide modal form
@@ -36,7 +40,7 @@ function handleClickButtonCloseModal (event) {
   modalWindowElement.style.display = 'none';
 }
 
-// show and hide modal warning, if you try to delete all done tasks. ok - delete, cancel - close modal
+// show and hide modal warning, if you click to delete all done tasks
 
 const modalWarningDeleteElement = $('.trello__warningDelete');
 
@@ -63,12 +67,12 @@ function handleClickWarningDelete (event) {
   });
 }
 
-function handleClickAddNewButton () {
+function handleClickButtonAddNew () {
   fillTodoForm();
   handleClickButtonOpenModal();
 }
 
-function handleClickCancelButton () {
+function handleClickButtonCancel () {
   currentTodo = undefined;
   handleClickButtonCloseModal();
 }
@@ -78,14 +82,16 @@ function handleClickButtonAddTask (event) {
   let user = users.find(user => user.id === selectUserElement.value);
   const allTasks = [...todos, ...todosDone, ...todosInProgress];
   if (currentTodo) {
-    // update existing todo
+    // update existing task
     const todo = allTasks.find(todo => todo.id.toString() === currentTodo.id.toString());
     todo.title = inputTitleElement.value;
     todo.description = textareaDescriptionElement.value;
     todo.user = user;
+    todo.priority = priorityElement.value;
+    todo.estimate = estimateElement.value;
   } else {
-    // create new todo
-    todos.push(new Todo(inputTitleElement.value, textareaDescriptionElement.value, user));
+    // create new task
+    todos.push(new Todo(inputTitleElement.value, textareaDescriptionElement.value, user, priorityElement.value, estimateElement.value));
   }
 
   currentTodo = undefined;
@@ -165,14 +171,77 @@ function handleChangeStatus (event) {
   }
 }
 
+function handleSubmitFormFilter (event) {
+  event.preventDefault();
+
+  const inputSearchElement = $('#search');
+  const inputSearchInProgressElement = $('#searchInProgress');
+  const inputSearchDoneElement = $('#searchDone');
+
+  const sortElement = $('#sortTodos');
+  const sortInProgressElement = $('#sortTodosInProgress');
+  const sortDoneElement = $('#sortTodosDone');
+
+  let resultsSearchTodos = getFromLocalStorage('todos').filter((item) => item.title.includes(inputSearchElement.value));
+  let resultsSearchInProgress = getFromLocalStorage('todosInProgress').filter((item) => item.title.includes(inputSearchInProgressElement.value));
+  let resultsSearchDone = getFromLocalStorage('todosDone').filter((item) => item.title.includes(inputSearchDoneElement.value));
+
+  if (sortElement.value === 'task') {
+    resultsSearchTodos = resultsSearchTodos.sort((prev, next) => prev.title.localeCompare(next.title));
+  }
+  if (sortInProgressElement.value === 'task') {
+    resultsSearchInProgress = resultsSearchInProgress.sort((prev, next) => prev.title.localeCompare(next.title));
+  }
+  if (sortDoneElement.value === 'task') {
+    resultsSearchDone = resultsSearchDone.sort((prev, next) => prev.title.localeCompare(next.title));
+  }
+
+  if (sortElement.value === 'createdAt') {
+    resultsSearchTodos = resultsSearchTodos.sort((prev, next) => {
+      const prevTime = new Date(prev.createdAt).getTime();
+      const nextTime = new Date(next.createdAt).getTime();
+      return nextTime - prevTime;
+    });
+  }
+  if (sortInProgressElement.value === 'createdAt') {
+    resultsSearchInProgress = resultsSearchInProgress.sort((prev, next) => {
+      const prevTime = new Date(prev.createdAt).getTime();
+      const nextTime = new Date(next.createdAt).getTime();
+      return nextTime - prevTime;
+    });
+  }
+  if (sortDoneElement.value === 'createdAt') {
+    resultsSearchDone = resultsSearchDone.sort((prev, next) => {
+      const prevTime = new Date(prev.createdAt).getTime();
+      const nextTime = new Date(next.createdAt).getTime();
+      return nextTime - prevTime;
+    });
+  }
+  if (sortElement.value === 'priority') {
+    resultsSearchTodos = resultsSearchTodos.sort((prev, next) => next.priority.length - prev.priority.length);
+  }
+  if (sortInProgressElement.value === 'priority') {
+    resultsSearchInProgress = resultsSearchInProgress.sort((prev, next) => next.priority.length - prev.priority.length);
+  }
+  if (sortDoneElement.value === 'priority') {
+    resultsSearchDone = resultsSearchDone.sort((prev, next) => next.priority.length - prev.priority.length);
+  }
+
+  setTodos(resultsSearchTodos);
+  setTodosInProgress(resultsSearchInProgress);
+  setTodosDone(resultsSearchDone);
+  renderTasks();
+}
+
 export {
   handleClickButtonOpenModal,
   handleClickButtonCloseModal,
-  handleClickAddNewButton,
-  handleClickCancelButton,
+  handleClickButtonAddNew,
+  handleClickButtonCancel,
   handleClickButtonAddTask,
   handleClickButtonEditElement,
   handleClickButtonDeleteElement,
   handleChangeStatus,
-  handleClickWarningDelete
+  handleClickWarningDelete,
+  handleSubmitFormFilter
 }

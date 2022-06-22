@@ -4,15 +4,14 @@ import {
   todos,
   todosDone,
   todosInProgress,
-  updateLocalStorage
+  updateLocalStorage,
+  users
 } from './data';
 
 import {
   createTemplateSelectUser,
   createTemplateTodo
 } from './templates';
-
-import { users } from './app';
 
 import { getDate } from './time';
 
@@ -23,7 +22,8 @@ const counterDoneElement = $('#counterDone');
 const inputTitleElement = $('.trello__modal__content__title');
 const textareaDescriptionElement = $('.trello__modal__content__description');
 const selectUserElement = $('.trello__modal__content__user');
-
+const priorityElement = $('.trello__modal__content__priority');
+const estimateElement = $('.trello__modal__content__estimate');
 const contentElement = $('.trello__list');
 
 const todoListElement = $('.trello__list__dynamic');
@@ -34,13 +34,15 @@ const formElement = $('.trello__modal__content');
 
 const buttonCloseModalElement = $('.trello__modal__content__handle__close');
 
-function Todo (title, description, user) {
+function Todo (title, description, user, priority, estimate) {
   this.title = title;
   this.description = description;
   this.user = user;
   this.createdAt = getDate();
   this.id = new Date().getTime();
   this.status = 'todos';
+  this.priority = priority;
+  this.estimate = estimate
 }
 
 const deleteTask = (id, array, name) => {
@@ -62,6 +64,8 @@ function fillTodoForm (task) {
   inputTitleElement.value = task?.title || '';
   textareaDescriptionElement.value = task?.description || '';
   selectUserElement.value = task?.user.id || '';
+  priorityElement.value = task?.priority || '';
+  estimateElement.value = task?.estimate || '';
 }
 
 function renderModal () {
@@ -126,6 +130,8 @@ export {
   inputTitleElement,
   textareaDescriptionElement,
   selectUserElement,
+  priorityElement,
+  estimateElement,
   cleanList,
   showWarningInProgress
 }

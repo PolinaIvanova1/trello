@@ -29,6 +29,16 @@
                 <div class="trello__list__todo__header__name">TO DO</div>
                 <div class="trello__list__todo__header__counter" id="counter">0</div>
             </div>
+            <form id="filter">
+                <input type="search" id="search" class="form-control" placeholder="search">
+                <select id="sortTodos" class="form-select">
+                    <option selected value="">sort by</option>
+                    <option value="createdAt">date</option>
+                    <option value="task">alphabet</option>
+                    <option value="priority">priority</option>
+                </select>
+            </form>
+
             <div class="trello__card">
             </div>
             <div class="trello__list__dynamic overflow-auto">
@@ -44,6 +54,15 @@
                 </div>
                 <div class="trello__list__progress__header__counter" id="counterInProgress"></div>
             </div>
+            <form id="filterInProgress">
+                <input type="search" id="searchInProgress" class="form-control" placeholder="search">
+                <select id="sortTodosInProgress" class="form-select">
+                    <option selected value="">sort by</option>
+                    <option value="task">alphabet</option>
+                    <option value="createdAt">date</option>
+                    <option value="priority">priority</option>
+                </select>
+            </form>
             <div class="trello__list__progress__task overflow-auto">
             </div>
             <div class="trello__list__progress__bottom trello__list__todo__button">
@@ -56,8 +75,16 @@
                 </div>
                 <div class="trello__list__done__header__counter" id="counterDone"></div>
             </div>
+            <form id="filterDone">
+                <input type="search" id="searchDone" class="form-control" placeholder="search">
+                <select id="sortTodosDone" class="form-select">
+                    <option selected value="">sort by</option>
+                    <option value="task">alphabet</option>
+                    <option value="createdAt">date</option>
+                    <option value="priority">priority</option>
+                </select>
+            </form>
             <div class="trello__list__done__task overflow-auto">
-
             </div>
             <button class="trello__list__done__button btn btn-outline-secondary btn-lg" id="showWarningDelete">
                 delete all
@@ -66,10 +93,20 @@
     </div>
     <div class="trello__modal">
         <form class="card-body trello__modal__content">
-            <input type="text" name="title" class="form-control trello__modal__content__title" placeholder="title"
+            <input type="text" name="title" class="form-control trello__modal__content__title" maxlength="25"
+                   placeholder="title"
                    aria-label="Username" aria-describedby="addon-wrapping" required>
             <textarea name="description" class="form-control trello__modal__content__description"
-                      aria-label="With textarea" placeholder="description" required></textarea>
+                      aria-label="Text" placeholder="description" maxlength="100" required></textarea>
+            <input type="text" name="estimate" placeholder="task hour estimate"
+                   class="form-control trello__modal__content__estimate" aria-label="Text"
+                   aria-describedby="addon-wrapping" maxlength="5" required>
+            <select name="priority" class="form-select trello__modal__content__priority">
+                <option value="" disabled selected hidden>priority</option>
+                <option value="⭐">⭐</option>
+                <option value="⭐⭐">⭐⭐</option>
+                <option value="⭐⭐⭐">⭐⭐⭐</option>
+            </select>
             <select name="user" class="form-select trello__modal__content__user" required>
                 <option value="" disabled selected hidden>user</option>
             </select>
@@ -93,7 +130,6 @@
                     cancel
                 </button>
             </div>
-
         </form>
     </div>
     <div class="trello__warningTasks">

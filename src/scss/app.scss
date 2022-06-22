@@ -49,8 +49,7 @@ html {
           &__item {
             display: flex;
             justify-content: space-between;
-            min-height: 10rem;
-            width: 80%;
+            width: 85%;
             box-sizing: border-box;
             padding: 1rem;
             margin: 1rem;
@@ -58,8 +57,9 @@ html {
             border-radius: 1rem;
             background-color: white;
 
-            &__title {
-              font-weight: bold;
+            &__description {
+              word-break: break-all;
+              width: 60%;
             }
 
             &__orange {
@@ -79,12 +79,14 @@ html {
             &__change {
               display: flex;
               flex-direction: column;
-              justify-content: inherit;
+              justify-content: flex-start;
               align-items: end;
 
-              &__edit, &__delete {
-                width: 5rem;
+              &__edit, &__delete, select {
+                margin: 0 0 0.5rem 0.5rem;
+                width: 9rem;
               }
+
             }
 
             &__hide {
@@ -102,6 +104,35 @@ html {
 
             &__name, &__counter {
               font-size: 1.5rem;
+            }
+          }
+
+          #filter {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            height: 3rem;
+
+            #search {
+              border-radius: 0;
+              border: 0.25rem solid $green;
+              border-right: 0;
+              width: 50%;
+              color: #888888;
+            }
+
+            #sortTodos {
+              border-radius: 0;
+              border: $green 0.25rem solid;
+              width: 50%;
+              color: #888888;
+              text-align: end;
+            }
+
+
+            #search:focus, #sortTodos:focus {
+              outline: none;
+              box-shadow: none;
             }
           }
 
@@ -131,6 +162,35 @@ html {
             }
           }
 
+          #filterInProgress {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            height: 3rem;
+
+            #searchInProgress {
+              border-radius: 0;
+              border: 0.25rem solid $purple;
+              border-right: 0;
+              width: 50%;
+              color: #888888;
+            }
+
+            #sortTodosInProgress {
+              border-radius: 0;
+              border: $purple 0.25rem solid;
+              width: 50%;
+              color: #888888;
+              text-align: end;
+            }
+
+
+            #searchInProgress:focus, #sortTodosInProgress:focus {
+              outline: none;
+              box-shadow: none;
+            }
+          }
+
           &__task {
             width: 100%;
             display: flex;
@@ -138,6 +198,7 @@ html {
             align-items: center;
 
           }
+
           &__bottom {
             @include mainButton;
             background-color: $purple;
@@ -154,6 +215,35 @@ html {
 
             &__name, &__counter {
               font-size: 1.5rem;
+            }
+          }
+
+          #filterDone {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            height: 3rem;
+
+            #searchDone {
+              border-radius: 0;
+              border: 0.25rem solid $orange;
+              border-right: 0;
+              width: 50%;
+              color: #888888;
+            }
+
+            #sortTodosDone {
+              border-radius: 0;
+              border: $orange 0.25rem solid;
+              width: 50%;
+              color: #888888;
+              text-align: end;
+            }
+
+
+            #searchDone:focus, #sortTodosDone:focus {
+              outline: none;
+              box-shadow: none;
             }
           }
 

@@ -16,26 +16,25 @@ import {
   handleClickButtonDeleteElement,
   handleClickButtonAddTask,
   handleChangeStatus,
-  handleClickAddNewButton,
-  handleClickCancelButton,
-  handleClickWarningDelete
+  handleClickButtonAddNew,
+  handleClickButtonCancel,
+  handleClickWarningDelete,
+  handleSubmitFormFilter
 } from './handlers.js'
 
-let users = [];
-
-async function fetchUsers () {
-  const response = await fetch('https://jsonplaceholder.typicode.com/users/');
-  const data = await response.json();
-  users = data.map(user => ({id: `${user.id}`, name: `${user.name}`}));
-}
+import { fetchUsers } from './data';
 
 const todoDeleteAllElement = $('.trello__list__done__button');
 
 const buttonOpenModalElement = $('.trello__list__todo__button');
 
+const formFilterElement = $('#filter');
+const formFilterInProgressElement = $('#filterInProgress');
+const formFilterDoneElement = $('#filterDone');
+
 function addListeners () {
-  buttonOpenModalElement.addEventListener('click', handleClickAddNewButton);
-  buttonCloseModalElement.addEventListener('click', handleClickCancelButton);
+  buttonOpenModalElement.addEventListener('click', handleClickButtonAddNew);
+  buttonCloseModalElement.addEventListener('click', handleClickButtonCancel);
   formElement.addEventListener('submit', handleClickButtonAddTask);
   todoListElement.addEventListener('click', handleClickButtonEditElement);
   todoInProgressElement.addEventListener('click', handleClickButtonEditElement);
@@ -44,6 +43,9 @@ function addListeners () {
   todoDoneElement.addEventListener('click', handleClickButtonDeleteElement);
   contentElement.addEventListener('change', handleChangeStatus);
   todoDeleteAllElement.addEventListener('click', handleClickWarningDelete);
+  formFilterElement.addEventListener('change', handleSubmitFormFilter);
+  formFilterInProgressElement.addEventListener('change', handleSubmitFormFilter);
+  formFilterDoneElement.addEventListener('change', handleSubmitFormFilter);
 }
 
 async function start () {
@@ -54,5 +56,3 @@ async function start () {
 }
 
 start();
-
-export { users };
