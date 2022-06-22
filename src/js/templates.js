@@ -10,7 +10,7 @@ const createTemplateTodo = task => {
         <div><b>${task.title}</b></div>
         <div>${task.description}</div>
         <div>${task.priority}</div>
-        <div>Estimate: ${task.estimate}h</div>
+        <div>estimate: ${task.estimate}h</div>
         <div>${task.user.name}</div>
         <div class="list__item__date">${task.createdAt}</div>
      </div>
